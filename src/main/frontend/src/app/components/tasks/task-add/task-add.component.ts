@@ -8,12 +8,20 @@ import {TaskService} from "../../../services/task.service";
     styleUrls: ['./task-add.component.css']
 })
 export class TaskAddComponent implements OnInit {
-    private addTaskValue: string = null;
+    private _addTaskValue: string = null;
 
     constructor(private taskService: TaskService) {
     }
 
     ngOnInit() {
+    }
+
+    public get addTaskValue(): string {
+        return this._addTaskValue;
+    }
+
+    public set addTaskValue(value: string) {
+        this._addTaskValue = value;
     }
 
     onTaskAdd(event) {
@@ -22,7 +30,7 @@ export class TaskAddComponent implements OnInit {
         this.taskService.addTask(task).subscribe(
             resp => {
                 let newTask: Task = JSON.parse(JSON.stringify(resp));
-                this.addTaskValue = '';
+                this._addTaskValue = '';
                 this.taskService.onTaskAdded.emit(newTask);
             }, error1 => console.error(error1)
         );
