@@ -17,12 +17,14 @@ import java.util.Collection;
 public interface TaskService {
     /**
      * Gets a list of all the {@link  Iterable< TaskDTO >}
+     *
      * @return {@link  Iterable< TaskDTO >}
      */
     Iterable<TaskDTO> getAllTasks();
 
     /**
      * Save all {@link Iterable< TaskDTO >}
+     *
      * @param tasks all tasks to be saved.
      * @return Saved {@link Iterable< TaskDTO >}
      */
@@ -46,6 +48,7 @@ public interface TaskService {
 
     /**
      * Task to be deleted.
+     *
      * @param id of the {@link TaskDTO} to be deleted.
      */
     void deleteTask(Long id);

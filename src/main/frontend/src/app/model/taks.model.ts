@@ -1,18 +1,17 @@
-import DateTimeFormat = Intl.DateTimeFormat;
+import {formatDate} from "@angular/common";
 
 export class Task {
     private _id: number;
     private _name: string;
     private _completed: boolean;
-    private _dueDate: Date;
 
-
-    constructor(id: number, name: string, completed: boolean, dueDate: Date) {
-        this._id = id;
+    constructor(name: string, completed: boolean, dueDate: Date) {
         this._name = name;
         this._completed = completed;
-        this._dueDate = dueDate;
+        this._dueDate = formatDate(dueDate, 'dd/MM/yyyy', 'en-GB');
     }
+
+    private _dueDate: string;
 
 
     get id(): number {
@@ -39,11 +38,11 @@ export class Task {
         this._completed = value;
     }
 
-    get dueDate(): Date {
+    get dueDate(): string {
         return this._dueDate;
     }
 
-    set dueDate(value: Date) {
-        this._dueDate = value;
+    set dueDate(value: string) {
+        this._dueDate = formatDate(value, 'dd/MM/yyyy', 'en-GB');
     }
 }
