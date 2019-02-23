@@ -2,7 +2,7 @@ package xyz.tag.tasks.repo;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
-import xyz.tag.tasks.domain.Task;
+import xyz.tag.tasks.domain.TaskDO;
 
 /**
  * PROJECT   : tasks
@@ -14,6 +14,6 @@ import xyz.tag.tasks.domain.Task;
  * CELL      : +27-64-906-8809
  */
 @Repository
-public interface TaskRepo extends JpaRepository<Task, Long> {
+public interface TaskRepo extends JpaRepository<TaskDO, Long> {
 
 }

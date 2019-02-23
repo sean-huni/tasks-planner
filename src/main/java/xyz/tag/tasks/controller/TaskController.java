@@ -1,7 +1,7 @@
 package xyz.tag.tasks.controller;
 
 import org.springframework.web.bind.annotation.*;
-import xyz.tag.tasks.domain.Task;
+import xyz.tag.tasks.dto.TaskDTO;
 import xyz.tag.tasks.service.TaskService;
 
 /**
@@ -23,17 +23,17 @@ public class TaskController {
     }
 
     @GetMapping
-    public Iterable<Task> getTaskList(){
+    public Iterable<TaskDTO> getTaskList() {
         return taskService.getAllTasks();
     }
 
     @PostMapping
-    public Task saveTask(@RequestBody Task task){
+    public TaskDTO saveTask(@RequestBody TaskDTO task) {
         return taskService.saveNewTask(task);
     }
 
     @PutMapping
-    public Task updateTask(@RequestBody Task task){
+    public TaskDTO updateTask(@RequestBody TaskDTO task) {
         return taskService.saveNewTask(task);
     }
 }

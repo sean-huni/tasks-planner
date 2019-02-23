@@ -1,11 +1,16 @@
 package xyz.tag.tasks.service.impl;
 
 import org.springframework.stereotype.Service;
-import xyz.tag.tasks.domain.Task;
+import xyz.tag.tasks.converter.ToTaskDOConverter;
+import xyz.tag.tasks.converter.ToTaskDTOConverter;
+import xyz.tag.tasks.domain.TaskDO;
+import xyz.tag.tasks.dto.TaskDTO;
 import xyz.tag.tasks.repo.TaskRepo;
 import xyz.tag.tasks.service.TaskService;
 
+import java.util.ArrayList;
 import java.util.Collection;
+import java.util.stream.Collectors;
 
 /**
  * PROJECT   : tasks
@@ -19,30 +24,35 @@ import java.util.Collection;
 @Service
 public class TaskServiceImpl implements TaskService {
     private TaskRepo taskRepo;
+    private ToTaskDOConverter toTaskDOConverter;
+    private ToTaskDTOConverter toTaskDTOConverter;
 
-    public TaskServiceImpl(TaskRepo taskRepo) {
+    public TaskServiceImpl(TaskRepo taskRepo, ToTaskDOConverter toTaskDOConverter, ToTaskDTOConverter toTaskDTOConverter) {
         this.taskRepo = taskRepo;
+        this.toTaskDOConverter = toTaskDOConverter;
+        this.toTaskDTOConverter = toTaskDTOConverter;
     }
 
     /**
-     * Gets a list of all the {@link  Iterable<Task>}
+     * Gets a list of all the {@link  Iterable< TaskDO >}
      *
-     * @return {@link  Iterable<Task>}
+     * @return {@link  Iterable< TaskDO >}
      */
     @Override
-    public Iterable<Task> getAllTasks() {
-        return taskRepo.findAll();
+    public Iterable<TaskDTO> getAllTasks() {
+        return taskRepo.findAll().stream().map(taskDO -> toTaskDTOConverter.convert(taskDO)).collect(Collectors.toCollection(ArrayList::new));
     }
 
     /**
-     * Save all {@link Iterable<Task>}
+     * Save all {@link Iterable< TaskDO >}
      *
      * @param tasks all tasks to be saved.
-     * @return Saved {@link Iterable<Task>}
+     * @return Saved {@link Iterable< TaskDO >}
      */
     @Override
-    public Iterable<Task> saveAllTasks(Collection<Task> tasks) {
-        return taskRepo.saveAll(tasks);
+    public Iterable<TaskDTO> saveAllTasks(Collection<TaskDTO> tasks) {
+        return taskRepo.saveAll(tasks.stream().map(taskDTO -> toTaskDOConverter.convert(taskDTO)).collect(Collectors.toCollection(ArrayList::new)))
+                .stream().map(s -> toTaskDTOConverter.convert(s)).collect(Collectors.toCollection(ArrayList::new));
     }
 
     /**
@@ -52,25 +62,25 @@ public class TaskServiceImpl implements TaskService {
      * @return saved task.
      */
     @Override
-    public Task saveNewTask(Task task) {
-        return taskRepo.save(task);
+    public TaskDTO saveNewTask(TaskDTO task) {
+        return toTaskDTOConverter.convert(taskRepo.save(toTaskDOConverter.convert(task)));
     }
 
     /**
-     * Update an existing {@link Task}
+     * Update an existing {@link TaskDTO}
      *
      * @param task to be updated
      * @return updated task.
      */
     @Override
-    public Task updateTask(Task task) {
-        return taskRepo.save(task);
+    public TaskDTO updateTask(TaskDTO task) {
+        return toTaskDTOConverter.convert(taskRepo.save(toTaskDOConverter.convert(task)));
     }
 
     /**
      * Task to be deleted.
      *
-     * @param id of the {@link Task} to be deleted.
+     * @param id of the {@link TaskDTO} to be deleted.
      */
     @Override
     public void deleteTask(Long id) {
