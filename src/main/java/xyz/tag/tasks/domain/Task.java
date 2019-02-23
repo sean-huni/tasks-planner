@@ -8,7 +8,7 @@ import lombok.NoArgsConstructor;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 
 /**
  * PROJECT   : tasks
@@ -29,7 +29,7 @@ public class Task {
     private Long id;
     private String name;
     @JsonFormat(pattern = "dd/MM/yyyy")
-    private LocalDateTime dueDate;
+    private LocalDate dueDate;
     private Boolean completed;
 
 }

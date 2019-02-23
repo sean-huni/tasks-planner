@@ -32,4 +32,8 @@ public class TaskController {
         return taskService.saveNewTask(task);
     }
 
+    @PutMapping
+    public Task updateTask(@RequestBody Task task){
+        return taskService.saveNewTask(task);
+    }
 }
