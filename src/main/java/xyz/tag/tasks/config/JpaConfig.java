@@ -1,5 +1,6 @@
 package xyz.tag.tasks.config;
 
+import org.springframework.data.jpa.repository.config.EnableJpaAuditing;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 
 /**
@@ -12,5 +13,6 @@ import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
  * CELL      : +27-64-906-8809
  */
 @EnableJpaRepositories
+@EnableJpaAuditing
 public class JpaConfig {
 }

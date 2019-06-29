@@ -33,7 +33,7 @@ public class TasksSpringApp {
             Collection<TaskDTO> taskCollection = new ArrayList<>();
             taskCollection.add(new TaskDTO(1L, "Create Spring Boot App", LocalDate.now(), true));
             taskCollection.add(new TaskDTO(2L, "Create Spring Project Packages", LocalDate.now().plus(1, ChronoUnit.DAYS), false));
-            taskCollection.add(new TaskDTO(3L, "Create Task Domain Class", LocalDate.now().plus(6, ChronoUnit.DAYS), false));
+            taskCollection.add(new TaskDTO(3L, "Create Task Domain Class", LocalDate.now().plus(8, ChronoUnit.DAYS), false));
             taskCollection.add(new TaskDTO(4L, "Create the service & repo classes", LocalDate.now().plus(6, ChronoUnit.DAYS), false));
             taskCollection.add(new TaskDTO(5L, "Create dummy data", LocalDate.now().plus(3, ChronoUnit.DAYS), false));
             taskCollection.add(new TaskDTO(6L, "Verify H2-DB  init-data", LocalDate.now().plus(4, ChronoUnit.DAYS), false));
